@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const userRoutes = require('./routes/users');
 
-dotenv.config();
+dotenv.config(); // Load environment variables from .env
 
 const app = express();
 
@@ -16,13 +16,13 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
+const mongoURI = process.env.MONGO_URI || process.env.DB_URL;
+
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.error('❌ MongoDB Error:', err));
 
-// Do NOT start the server here!
-// Remove app.listen(...)
-
-module.exports = app; // Export the app instance
+// Do NOT listen here; used by bin/www for flexible deployment
+module.exports = app;
