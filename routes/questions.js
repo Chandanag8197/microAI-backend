@@ -14,11 +14,13 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// Get random question by topic
-router.get('/random/:topic', async (req, res) => {
+// Get random question by topics (comma-separated)
+router.get('/random', async (req, res) => {
   try {
-    const topic = req.params.topic;
-    const questions = await Question.find({ topic });
+    const topics = req.query.topics ? req.query.topics.split(',') : ["data-structures", "algorithms"];
+    if (topics.length === 0) return res.status(400).json({ error: 'No topics provided' });
+
+    const questions = await Question.find({ topic: { $in: topics } });
     if (questions.length === 0) return res.status(404).json({ error: 'No questions found' });
 
     const random = questions[Math.floor(Math.random() * questions.length)];
@@ -27,5 +29,22 @@ router.get('/random/:topic', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Get all questions by topics (comma-separated), sorted by _id (insertion order)
+// router.get('/all', async (req, res) => {
+//   try {
+//     const topics = req.query.topics ? req.query.topics.split(',') : ["data-structures", "algorithms"];
+//     if (topics.length === 0) return res.status(400).json({ error: 'No topics provided' });
+
+//     const questions = await Question.find({ topic: { $in: topics } });
+//     if (questions.length === 0) return res.status(404).json({ error: 'No questions found' });
+
+//     // Pick one random question
+//     const random = questions[Math.floor(Math.random() * questions.length)];
+//     res.json(random);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 module.exports = router;
