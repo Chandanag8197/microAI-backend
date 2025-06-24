@@ -35,3 +35,14 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+    // Forgot Password (basic version: just responds OK)
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    // Here you would generate a reset token and send an email
+    // For now, just respond OK
+    res.json({ message: "If this email exists, a reset link will be sent." });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
