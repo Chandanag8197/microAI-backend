@@ -640,6 +640,7 @@ const sampleQuestions = [
     "questionText": "How do you manage secrets and sensitive data in DevOps workflows?",
     "keywords": ["secret management tools", "environment variables", "encryption", "access control", "compliance", "auditability", "best practices"]
   },
+  // Manual Testing Fundamentals
   {
     "topic": "manual-testing-fundamentals",
     "questionText": "What is the difference between verification and validation in software testing?",
@@ -710,6 +711,7 @@ const sampleQuestions = [
       "test suite maintenance", "repetitive tasks", "human error", "automation feasibility", "prioritization", "test coverage", "resource allocation"
     ]
   },
+  // Automation Testing Basics
   {
     "topic": "automation-testing-basics",
     "questionText": "What are the key benefits and limitations of automation testing?",
@@ -780,6 +782,7 @@ const sampleQuestions = [
       "modularity", "naming conventions", "code reuse", "parameterization", "error handling", "documentation", "review process"
     ]
   },
+  // Testing Tools
   {
     "topic": "testing-tools",
     "questionText": "What factors should you consider when choosing a testing tool for your project?",
@@ -850,6 +853,7 @@ const sampleQuestions = [
       "compatibility", "data synchronization", "workflow automation", "customization", "maintenance", "scalability", "vendor support"
     ]
   },
+  // API Testing
   {
     "topic": "api-testing",
     "questionText": "What are the key aspects to validate when testing a REST API?",
