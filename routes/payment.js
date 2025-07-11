@@ -1,17 +1,24 @@
+const path = require("path");
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); // ✅ Load .env from root
+
 const express = require("express");
 const Razorpay = require("razorpay");
 const router = express.Router();
 
+// 🔍 Debug (optional): Check if keys are loaded correctly
+// console.log('RAZORPAY_KEY_ID:', process.env.RAZORPAY_KEY_ID);
+// console.log('RAZORPAY_SECRET:', process.env.RAZORPAY_SECRET);
+
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,     // set in your .env
-  key_secret: process.env.RAZORPAY_SECRET  // set in your .env
+  key_id: process.env.RAZORPAY_KEY_ID,     // Must be in .env
+  key_secret: process.env.RAZORPAY_KEY_SECRET// Must be in .env
 });
 
 router.post("/create-order", async (req, res) => {
   const { amount } = req.body;
 
   const options = {
-    amount: amount * 100, // convert to paise
+    amount: amount * 100, // Convert to paise
     currency: "INR",
     receipt: `order_rcptid_${Math.floor(Math.random() * 1000)}`,
     payment_capture: 1
